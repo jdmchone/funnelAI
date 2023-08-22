@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  ENVIRONMENT: "dev"
+  API_ENDPOINT: "http://api.dev.localhost"
