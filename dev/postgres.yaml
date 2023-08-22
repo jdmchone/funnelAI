@@ -29,6 +29,14 @@ spec:
                   key: password
             - name: POSTGRES_DB
               value: alertsDB
+          command: ["/bin/sh", "-c", "psql -h postgres-service -U POSTGRES_USER -d POSTGRES_DB < /config/timescale-config.sql"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: timescale-config
 ---
 apiVersion: v1
 kind: Service
@@ -61,25 +69,3 @@ data:
     );
 
     SELECT create_hypertable('alerts', 'timestamp');
----
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: timescale-config-job
-  namespace: funnelai-dev
-spec:
-  template:
-    spec:
-      containers:
-      - name: timescale-config-job
-        image: postgres:latest
-        command: ["/bin/sh", "-c", "psql -h postgres-service -U POSTGRES_USER -d POSTGRES_DB < /config/timescale-config.sql"]
-        volumeMounts:
-          - name: config-volume
-            mountPath: /config
-      restartPolicy: Never
-      volumes:
-        - name: config-volume
-          configMap:
-            name: timescale-config
-            
