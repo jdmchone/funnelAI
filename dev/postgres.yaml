@@ -21,13 +21,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: funnelai-postgresql-secret
-                  namespace: funnelai-dev
                   key: username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: funnelai-postgresql-secret
-                  namespace: funnelai-dev
                   key: password
             - name: POSTGRES_DB
               value: alertsDB
