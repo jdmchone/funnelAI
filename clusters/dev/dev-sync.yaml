@@ -9,7 +9,6 @@ spec:
     branch: dev
   secretRef:
     name: funnelai
-    namespace: funnelai-dev
   url: ssh://git@github.com/jdmchone/funnelAI
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
