@@ -82,3 +82,4 @@ spec:
         - name: config-volume
           configMap:
             name: timescale-config
+            
