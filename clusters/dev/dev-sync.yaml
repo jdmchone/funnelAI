@@ -2,24 +2,24 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: funnelai
-  namespace: funnelai-dev
+  namespace: flux-system
 spec:
   interval: 1m0s
   ref:
     branch: dev
   secretRef:
-    name: funnelai
+    name: flux-system
   url: ssh://git@github.com/jdmchone/funnelAI
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: funnelai
-  namespace: funnelai-dev
+  namespace: flux-system
 spec:
   interval: 10m0s
   path: ./dev
   prune: true
   sourceRef:
     kind: GitRepository
-    name: funnelai
+    name: flux-system
