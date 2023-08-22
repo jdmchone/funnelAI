@@ -77,7 +77,7 @@ spec:
         volumeMounts:
           - name: config-volume
             mountPath: /config
-      restartPolicy: OnFailure
+      restartPolicy: Never
       volumes:
         - name: config-volume
           configMap:
