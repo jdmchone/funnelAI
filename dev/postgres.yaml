@@ -16,24 +16,24 @@ spec:
         app: postgres
     spec:
       containers:
-        - name: postgres
-          image: timescale/timescaledb-ha:pg15-latest
-          env:
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: funnelai-postgresql-secret
-                  key: username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: funnelai-postgresql-secret
-                  key: password
-            - name: POSTGRES_DB
-              value: alertsDB
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
+      - name: postgres
+        image: timescale/timescaledb-ha:pg15-latest
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: funnelai-postgresql-secret
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: funnelai-postgresql-secret
+                key: password
+          - name: POSTGRES_DB
+            value: alertsDB
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgredb
       volumes:
         - name: postgredb
           persistentVolumeClaim:
