@@ -43,11 +43,13 @@ kind: Service
 metadata:
   name: postgres-service
   namespace: funnelai-dev
+  labels:
+    app: postgres
 spec:
   selector:
     app: postgres
   ports:
-    - protocol: TCP
+    - protocol: NodePort
       port: 5432
       targetPort: 5432
 ---
